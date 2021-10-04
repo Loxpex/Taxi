@@ -10,10 +10,12 @@ namespace Taxi
             int NumberOfWorkers = Convert.ToInt32(Console.ReadLine());
             int[] Distance = new int[NumberOfWorkers];
             int[] TaxiCost = new int[NumberOfWorkers];
-            for (int i = 0; i < NumberOfWorkers; i++)
+            Console.WriteLine("Введите дистанцию "+ NumberOfWorkers +" Работников до дома через Enter");
+            for (int i = 0; i < NumberOfWorkers; i++)  
             {
                 Distance[i] = Convert.ToInt32(Console.ReadLine());
             }
+            Console.WriteLine("Теперь введите цену за киллометр через Enter");
             for (int i = 0; i < NumberOfWorkers; i++)
             {
                 TaxiCost[i] = Convert.ToInt32(Console.ReadLine());
