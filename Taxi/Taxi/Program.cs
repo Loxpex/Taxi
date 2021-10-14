@@ -4,14 +4,14 @@ namespace Taxi
 {
     class Program
     {
-        public static int InputCount()
+        public static int InputCount()                                // ввод количества сотрудников 
         {
             Console.WriteLine("Введите количество сотрудников");
             int result = Convert.ToInt32(Console.ReadLine());
             return result;
         }
 
-        public static int[] InputDataInMassive(int massiveSize)
+        public static int[] InputDataInMassive(int massiveSize)     //заполнение массивов
         {
             int[] result = new int[massiveSize];
             for (int i = 0; i < massiveSize; i++)
@@ -20,7 +20,7 @@ namespace Taxi
             }
             return result;
         }
-        public static void CalculateIndexes(int massiveSize, int[] massive)
+        public static void CalculateIndexes(int massiveSize, int[] massive)       //заполнение массива с номерами таксистов и работников
         {
             for (int j = 0; j < massiveSize; j++)
             {
@@ -28,7 +28,7 @@ namespace Taxi
             }
         }
 
-        public static void MassiveSorting(int NumberOfWorkers, int[] DistanceTest, int[] Distance, int[] ID, int[] TaxiCostTest, int[] TaxiCost, int[] TaxiID)
+        public static void MassiveSorting(int NumberOfWorkers, int[] DistanceTest, int[] Distance, int[] ID, int[] TaxiCostTest, int[] TaxiCost, int[] TaxiID)     //Очень сложные вычисления не пытайтесь вникать, я сам не понимаю что там
         {
             for (int i = 0; i < NumberOfWorkers; i++)
             {
@@ -58,7 +58,7 @@ namespace Taxi
             }
         }
 
-        public static void TheEnd(int NumberOfWorkers, int[] ID, int[] TaxiID)
+        public static void TheEnd(int NumberOfWorkers, int[] ID, int[] TaxiID)        //вывод
         {
             for (int i = 0; i < NumberOfWorkers; i++)
             {
