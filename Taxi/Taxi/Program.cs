@@ -4,37 +4,32 @@ namespace Taxi
 {
     class Program
     {
-        static void Main()
+        public static int InputCount()
         {
             Console.WriteLine("Введите количество сотрудников");
-            int NumberOfWorkers = Convert.ToInt32(Console.ReadLine());
-            int[] Distance = new int[NumberOfWorkers];
-            int[] TaxiCost = new int[NumberOfWorkers];
-            Console.WriteLine("Введите дистанцию "+ NumberOfWorkers +" Работников до дома через Enter");
-            for (int i = 0; i < NumberOfWorkers; i++)  
-            {
-                Distance[i] = Convert.ToInt32(Console.ReadLine());
-            }
-            Console.WriteLine("Теперь введите цену за киллометр через Enter");
-            for (int i = 0; i < NumberOfWorkers; i++)
-            {
-                TaxiCost[i] = Convert.ToInt32(Console.ReadLine());
-            }
-            int[] DistanceTest = new int[NumberOfWorkers];
-            int[] TaxiCostTest = new int[NumberOfWorkers];
-            int[] ID = new int[NumberOfWorkers];
-            int[] TaxiID = new int[NumberOfWorkers];
+            int result = Convert.ToInt32(Console.ReadLine());
+            return result;
+        }
 
-            for (int j = 0; j < NumberOfWorkers; j++)
+        public static int[] InputDataInMassive(int massiveSize)
+        {
+            int[] result = new int[massiveSize];
+            for (int i = 0; i < massiveSize; i++)
             {
-                DistanceTest[j] = Distance[j];
-                TaxiCostTest[j] = TaxiCost[j];                      //гуд
-                ID[j] = j + 1;
-                TaxiID[j] = j + 1;
+                result[i] = Convert.ToInt32(Console.ReadLine());
             }
+            return result;
+        }
+        public static void CalculateIndexes(int massiveSize, int[] massive)
+        {
+            for (int j = 0; j < massiveSize; j++)
+            {
+                massive[j] = j + 1;
+            }
+        }
 
-            Console.WriteLine("");
-
+        public static void MassiveSorting(int NumberOfWorkers, int[] DistanceTest, int[] Distance, int[] ID, int[] TaxiCostTest, int[] TaxiCost, int[] TaxiID)
+        {
             for (int i = 0; i < NumberOfWorkers; i++)
             {
                 int minDistance = 100000000;
@@ -42,12 +37,12 @@ namespace Taxi
                 for (int j = 0; j < NumberOfWorkers; j++)
                 {
 
-                    if (DistanceTest[j] <=minDistance && DistanceTest[j] != -1)                            
+                    if (DistanceTest[j] <= minDistance && DistanceTest[j] != -1)
                     {
                         minDistance = DistanceTest[j];
                         Distance[i] = minDistance;
                         ID[i] = j + 1;
-                        
+
                     }
 
                     if (maxCost < TaxiCostTest[j] && TaxiCostTest[j] != -1)
@@ -55,28 +50,55 @@ namespace Taxi
                         maxCost = TaxiCostTest[j];
                         TaxiCost[i] = maxCost;
                         TaxiID[i] = j + 1;
-                       
+
                     }
                 }
                 DistanceTest[ID[i] - 1] = -1;
                 TaxiCostTest[TaxiID[i] - 1] = -1;
-
-                
             }
+        }
 
-
-
+        public static void TheEnd(int NumberOfWorkers, int[] ID, int[] TaxiID)
+        {
             for (int i = 0; i < NumberOfWorkers; i++)
             {
                 for (int j = 0; j < NumberOfWorkers; j++)
                 {
-                    if (ID[j] == i+1)
+                    if (ID[j] == i + 1)
                     {
                         Console.WriteLine(TaxiID[j]);
                     }
                 }
             }
+        }
 
+
+        static void Main()
+        {
+            var NumberOfWorkers = InputCount();
+
+            int[] Distance = new int[NumberOfWorkers];
+            int[] TaxiCost = new int[NumberOfWorkers];
+
+            Console.WriteLine("Введите дистанцию " + NumberOfWorkers + " Работников до дома через Enter");
+            Distance = InputDataInMassive(NumberOfWorkers);
+
+            Console.WriteLine("Теперь введите цену за киллометр через Enter");
+            TaxiCost = InputDataInMassive(NumberOfWorkers);
+
+            int[] DistanceTest = (int[])Distance.Clone();
+            int[] TaxiCostTest = (int[])TaxiCost.Clone();
+            int[] ID = new int[NumberOfWorkers];
+            int[] TaxiID = new int[NumberOfWorkers];
+
+            CalculateIndexes(NumberOfWorkers, ID);
+            CalculateIndexes(NumberOfWorkers, TaxiID);
+
+            Console.WriteLine("");
+
+            MassiveSorting(NumberOfWorkers, DistanceTest, Distance, ID, TaxiCostTest, TaxiCost, TaxiID);
+
+            TheEnd(NumberOfWorkers, ID, TaxiID);
         }
     }
 }
